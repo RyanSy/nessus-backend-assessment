@@ -5,7 +5,11 @@ var qs = require('querystring');
 var port = process.env.PORT || 8080;
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-var dbUrl = 'mongodb://heroku_nw56swbz:9312qvb35fi9njhj2hclhjgfod@ds041150.mlab.com:41150/heroku_nw56swbz';
+if (port == 8080) {
+  var dbUrl = 'mongodb://localhost:27017/nessusdb'
+} else {
+  var dbUrl = 'mongodb://heroku_nw56swbz:9312qvb35fi9njhj2hclhjgfod@ds041150.mlab.com:41150/heroku_nw56swbz';
+}
 
 /*
 ==================================================
