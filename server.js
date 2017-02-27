@@ -2,10 +2,10 @@ var http = require('http');
 var fs = require('fs');
 var sys = require('util');
 var qs = require('querystring');
-var port = 8080;
+var port = process.env.PORT || 8080;
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-var dbUrl = 'mongodb://localhost:27017/nessusdb';
+var dbUrl = 'mongodb://<dbuser>:<dbpassword>@ds041150.mlab.com:41150/heroku_nw56swbz';
 
 /*
 ==================================================
