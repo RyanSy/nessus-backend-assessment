@@ -1,3 +1,5 @@
 # nessus-backend-assessment
 
-to do: display on page, incorporate pagination and sorting
+to do: display configurations on page, incorporate pagination and sorting
+
+nth: persistence/session

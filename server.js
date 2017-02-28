@@ -1,5 +1,6 @@
 var http = require('http');
 var fs = require('fs');
+var path = require('path');
 var sys = require('util');
 var qs = require('querystring');
 var port = process.env.PORT || 8080;
@@ -17,13 +18,6 @@ http.createServer
 ==================================================
 */
 var server = http.createServer(function (req, res) {
-  /* control for favicon */
-  if (req.url === '/favicon.ico') {
-    res.writeHead(200, {'Content-Type': 'image/x-icon'} );
-    res.end();
-    return;
-  }
-
   /* get post data */
   var headers = req.headers;
   var method = req.method;
@@ -38,7 +32,6 @@ var server = http.createServer(function (req, res) {
     // */
     body += data;
   }).on('end', function() {
-    var postdata =  qs.parse(body);
     /*
     console.log('> postdata: ', postdata);
     console.log('> headers: ', headers);
@@ -47,8 +40,11 @@ var server = http.createServer(function (req, res) {
     console.log('> body: ', body);
     // */
 
+    var postdata =  qs.parse(body);
+
   /* render views function */
   var renderView = function(file) {
+
     fs.readFile(file, function (error, data) {
         if (error) {
             res.writeHead(404);
@@ -92,6 +88,8 @@ var server = http.createServer(function (req, res) {
       console.log( '/ route called');
       if (req.url === '/login') {
         renderView('./views/login.html');
+      } else {
+        errorView();
       }
       break;
 
@@ -145,27 +143,40 @@ var server = http.createServer(function (req, res) {
     case '/show-configurations':
       console.log('/show-configurations route called');
       if (req.url === '/show-configurations') {
-        MongoClient.connect(dbUrl, function(err, db) {
-          assert.equal(null, err);
-          console.log("Connected successfully to db");
-          var findDocuments = function(db, callback) {
-            var collection = db.collection('configurations');
-            collection.find({}).toArray(function(err, docs) {
-              assert.equal(err, null);
-              console.log("Found the following records");
-              console.log(docs)
-              callback(docs);
-            });
-          }
-          findDocuments(db, function() {
-            db.close();
-          });
-        });
-        renderView('./views/configurations.html');
-      } else {
-        errorView();
+        renderView('./views/configurations.html')
       }
       break;
+
+      /*
+        ==================================================
+        REST API endpoint: GET /configurations
+        ==================================================
+      */
+      case '/configurations':
+        console.log('/configurations route called');
+        if (req.url === '/configurations') {
+          MongoClient.connect(dbUrl, function(err, db) {
+            assert.equal(null, err);
+            console.log("Connected successfully to db");
+            var findDocuments = function(db, callback) {
+              var collection = db.collection('configurations');
+              collection.find({}).toArray(function(err, docs) {
+                assert.equal(err, null);
+                console.log("Found the following records");
+                console.log(docs)
+                callback(docs);
+                res.writeHead(200, { "Content-Type": "application/json"});
+                res.end('configurations retrieved from database.');
+              });
+            }
+            findDocuments(db, function(data) {
+              var configData = JSON.stringify(data);
+              res.end(configData);
+              db.close();
+            });
+          });
+        }
+        break;
 
     /*
       ==================================================
@@ -222,7 +233,7 @@ var server = http.createServer(function (req, res) {
 
       /*
         ==================================================
-        /logout route
+        /logout
         ==================================================
       */
       case '/logout':

@@ -6,9 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "ryan sy",
   "license": "ISC",
-  "description": "",
+  "description": "example UI with nodejs back-end (no external frame)",
   "dependencies": {
     "mongodb": "^2.2.24"
   }
