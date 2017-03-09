@@ -1,0 +1,8 @@
+body {
+    font-family: sans-serif;
+}
+
+th, td {
+  text-align: left;
+  padding: 5px;
+}
