@@ -72,3 +72,11 @@ xhr.onerror = function(error) {
 };
 
 xhr.send();
+
+function confirmDelete() {
+    if (window.confirm("Delete configuration?")) {
+        return;
+    } else {
+        return false;
+    }
+}

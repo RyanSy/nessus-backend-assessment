@@ -1,7 +1,9 @@
 # nessus-backend-assessment
 
-to do: display configurations on page, incorporate pagination and sorting
+to do:
 
-nth: persistence/session
+- pagination and sorting
 
-config names must be unique
+- persistence/session
+
+- config names must be unique
