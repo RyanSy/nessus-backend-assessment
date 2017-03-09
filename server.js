@@ -105,17 +105,17 @@ var server = http.createServer(function(req, res) {
                 }
                 break;
 
-            // case '/getConfigurations.js':
-            //     console.log(url + ' called');
-            //     if (url === '/getConfigurations.js') {
-            //         renderData('./public/js/getConfigurations.js');
-            //     }
-            //     break;
-
-            case '/script.js':
+            case '/configurations.js':
                 console.log(url + ' called');
-                if (url === '/script.js') {
-                    renderData('./public/js/script.js');
+                if (url === '/configurations.js') {
+                    renderData('./public/js/configurations.js');
+                }
+                break;
+
+            case '/edit-configuration.js':
+                console.log(url + ' called');
+                if (url === '/edit-configuration.js') {
+                    renderData('./public/js/edit-configuration.js');
                 }
                 break;
 
