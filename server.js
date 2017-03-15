@@ -227,6 +227,10 @@ var server = http.createServer(function(req, res) {
                         console.log("Connected successfully to db");
                         var findDocuments = function(db, callback) {
                             var collection = db.collection('configurations');
+                            // var options = {
+                            //     "limit": 10,
+                            //     "skip": 0
+                            // };
                             collection.find({}).toArray(function(err, docs) {
                                 assert.equal(err, null);
                                 console.log("Found the following records");
@@ -240,6 +244,7 @@ var server = http.createServer(function(req, res) {
                         }
                         findDocuments(db, function(data) {
                             var configData = JSON.stringify(data);
+                            console.log("Number of results: ", data.length);
                             res.end(configData);
                             db.close();
                         });

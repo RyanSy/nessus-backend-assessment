@@ -10,16 +10,22 @@
 <body>
     <h1>Nessus Backend Software Engineer Assessment</h1>
     <hr>
-    <div id="config-table">
-        <table>
+    <div>
+        <table id="config-table">
             <form action="/add-configuration" method="post">
                 <input type="submit" name="" value="Add Configuration">
             </form>
-            <thead id="config-table-head"></thead>
-            <tbody id="config-table-body"></tbody>
+            <h5 id="config-results"></h5>
+            <tr>
+                <th onclick="sortTable(0)">Name</th>
+                <th onclick="sortTable(1)">Hostname</th>
+                <th onclick="sortTable(2)">Port</th>
+                <th onclick="sortTable(3)">Username</th>
+            </tr>
         </table>
     </div>
     <hr>
+    <ul id="page-numbers"></ul>
     <a href="/logged-out">Log Out</a>
     <script src="/configurations.js"></script>
 </body>

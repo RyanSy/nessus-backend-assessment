@@ -3,6 +3,24 @@ body {
 }
 
 th, td {
-  text-align: left;
-  padding: 5px;
+    text-align: left;
+    padding: 5px;
+}
+
+th {
+    color: blue;
+    text-decoration: underline;
+}
+
+th:hover {
+    cursor: pointer;
+}
+
+.page-number {
+    padding: 5px;
+    margin: 5px;
+}
+
+.page-number:hover {
+    cursor: pointer;
 }

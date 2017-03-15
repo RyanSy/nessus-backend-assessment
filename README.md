@@ -1,6 +1,7 @@
 # nessus-backend-assessment
 
-to do:
+to fix:
+- password hashing
 
 - pagination and sorting
 
